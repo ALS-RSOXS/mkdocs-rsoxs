@@ -1,6 +1,6 @@
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        document.querySelectorAll("a.{{ config.mdx_configs['toc']['permalink_class'] | default('headerlink') }}").forEach(function (link) {
+        document.querySelectorAll("a.{{ config.mdx_configs.get('toc', {}).get('permalink_class', 'headerlink') }}").forEach(function (link) {
             link.addEventListener("click", function (e) {
                 e.preventDefault();
 
@@ -9,11 +9,6 @@
 
                 navigator.clipboard.writeText(url).then(function () {
                     // Optional: brief visual feedback
-                    /*
-                    const original = link.textContent;
-                    link.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-icon lucide-check inline-block"><path d="M20 6 9 17l-5-5"/></svg>';
-                    setTimeout(() => (link.textContent = original), 1500);
-                    */
                 });
             });
         });
