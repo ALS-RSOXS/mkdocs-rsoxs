@@ -39,6 +39,7 @@
                 <div class="hidden w-full flex-1 md:flex md:w-auto md:flex-none">
                     {% include "templates/search.html" %}
                 </div>
+                {% if config.repo_url %}
                 <div data-orientation="vertical" role="none" data-slot="separator"
                     class="bg-border shrink-0 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px ml-2 hidden lg:block">
                 </div>
@@ -55,6 +56,7 @@
                     </span>
                     {% endif %}
                 </a>
+                {% endif %}
                 <div data-orientation="vertical" role="none" data-slot="separator"
                     class="bg-border shrink-0 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px 3xl:flex hidden">
                 </div>
