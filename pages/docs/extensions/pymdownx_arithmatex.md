@@ -23,7 +23,7 @@ markdown_extensions:
     Currently we ship the version `v0.16.33`.
 
 !!! info "NEW!"
-    Now you can pass options to Katex (like macros). See the dedicated [theme option](../get_started.md#katex_options-dict) for more details.
+    Now you can pass options to Katex (like macros). See the dedicated [theme option](../10_get_started.md#katex_options-dict) for more details.
 
 ## Syntax
 

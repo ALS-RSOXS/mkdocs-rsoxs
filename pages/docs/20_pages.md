@@ -19,7 +19,7 @@ The navigation follows bare mkdocs. You should just notice that folders will cre
 To sort the sections, you can use the common `00_section_title/` hack. The first numbers sort the folders in the filesystem (so the sections). They are removed by the theme at compile time. 
 
 !!! warning "Important"
-    `mkdocs-shadcn` has not been extensively tested with highly nested documentation (`d>2`, i.e. `root / folder / folder`). When subfolders are used, we may recommend to activate the [`topbar_sections`](./get_started.md#topbar_sections-bool) option in the theme configuration. This will display the top level sections in the top bar.
+    `mkdocs-shadcn` has not been extensively tested with highly nested documentation (`d>2`, i.e. `root / folder / folder`). When subfolders are used, we may recommend to activate the [`topbar_sections`](./10_get_started.md#topbar_sections-bool) option in the theme configuration. This will display the top level sections in the top bar.
 
 In addition, two other attributes may help to configure pages within the sidebar.
 
@@ -75,7 +75,7 @@ image: https://raw.githubusercontent.com/asiffer/mkdocs-shadcn/refs/heads/master
 ## Extra
 
 As we may find in [shadcn/ui](https://ui.shadcn.com/docs), you can add a small badge in the sidebar
-to denote new item. You can change the default color of the badge with the [`accent`](./get_started.md#accent-str) theme config.
+to denote new item. You can change the default color of the badge with the [`accent`](./10_get_started.md#accent-str) theme config.
 
 ```yaml
 new: true
@@ -85,7 +85,7 @@ new: true
   In versions `<=0.9.10`, `alpha` and `beta` were also supported. **They are still supported** but a warning badge is used instead .
 
 
-The [`show_datetime` theme option](./get_started.md#show_datetime-bool) can be overriden per page 
+The [`show_datetime` theme option](./10_get_started.md#show_datetime-bool) can be overriden per page 
 if you want to show/hide the last update date for a specific page.
 
 ```yaml
