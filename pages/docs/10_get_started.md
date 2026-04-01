@@ -26,7 +26,7 @@ Add the package to your project.
         :::bash
         poetry add mkdocs-shadcn
 
-If you want to use `pymdown` extensions, you can also install the `pymdown-extensions` package:
+If you want to use [`pymdown` extensions](https://facelessuser.github.io/pymdown-extensions/), you can also install the `pymdown-extensions` package:
 
 === "pip"
 
@@ -44,6 +44,23 @@ If you want to use `pymdown` extensions, you can also install the `pymdown-exten
         :::bash
         poetry add pymdown-extensions
 
+
+!!! warning "Tip"
+    Don't forget to install `Pygments` to activate syntax highlighting.
+
+
+## No-brainer
+
+You can init your new python project using `uv` and embed `mkdocs` documentation as follows.
+
+```shell
+uv init myproject 
+cd myproject
+uv add --dev mkdocs mkdocs-shadcn pymdown-extensions Pygments
+uv run mkdocs new .
+echo -e "theme:\n  name: shadcn" >> mkdocs.yml
+uv run mkdocs serve --livereload
+```
 
 ## Configure
 
