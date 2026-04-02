@@ -17,7 +17,7 @@
 </p>
 
 
-![screenshot](https://raw.githubusercontent.com/asiffer/mkdocs-shadcn/master/.github/assets/screenshot4.png)
+![screenshot](https://raw.githubusercontent.com/asiffer/mkdocs-shadcn/master/.github/assets/screenshot.png)
 
 
 > [!IMPORTANT]  
