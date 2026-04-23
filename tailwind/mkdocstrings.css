@@ -1,3 +1,11 @@
+.theme-default {
+  --doc-symbol-attribute-fg-color: var(--color-primary);
+  --doc-symbol-function-fg-color: var(--color-chart-5);
+  --doc-symbol-method-fg-color: var(--color-chart-5);
+  --doc-symbol-class-fg-color: var(--color-chart-3);
+  --doc-symbol-module-fg-color: var(--color-chart-1);
+}
+
 article .doc code {
 	@apply bg-transparent p-0;
 }
@@ -34,7 +42,7 @@ article .doc .doc-contents h3 {
 	@apply text-lg *:[code]:text-base;
 }
 
-article .doc .doc-contents code {
+article .doc .doc-contents code:not(.doc-symbol) {
 	@apply rounded-none;
 }
 
@@ -59,7 +67,7 @@ article .doc .doc-contents .doc-class-bases {
 }
 
 article .doc .doc-contents .doc-section-title {
-	@apply text-foreground font-semibold;
+	@apply text-foreground font-medium text-sm block mt-2 -mb-2;
 }
 
 article .doc .doc-object {
@@ -70,14 +78,14 @@ article .doc .doc-object.doc-function {
 	@apply bg-stone-50 dark:bg-stone-900;
 }
 
-article .doc .doc-object h2,
-article .doc .doc-object h3,
-article .doc .doc-object h4 {
-	@apply mt-0 flex flex-row items-center justify-between;
+article .doc.doc-object h2,
+article .doc.doc-object h3,
+article .doc.doc-object h4 {
+	@apply mt-0 flex flex-row items-center gap-2;
 }
 
 article .doc .doc-object .doc-labels {
-	@apply flex flex-row gap-2;
+	@apply grow flex flex-row gap-2 justify-end;
 }
 
 article .doc .doc-object .doc-contents {
@@ -88,7 +96,7 @@ article .doc .doc-object .doc-contents ul > li {
 	@apply mt-1;
 }
 
-article .doc .doc-object code {
+article .doc.doc-object code {
 	@apply mt-0;
 }
 
@@ -98,4 +106,37 @@ article .doc small code {
 
 article .doc .doc-class-bases code {
 	@apply font-medium;
+}
+
+article .doc .doc-symbol {
+	@apply border rounded px-1 py-0.5 font-medium;
+}
+
+article .doc .doc-symbol::after {
+	font-size: unset;
+}
+
+article .doc .doc-children .doc-symbol {
+	@apply text-sm py-0;
+}
+
+
+article .doc .doc-symbol.doc-symbol-class {
+	@apply border-(--doc-symbol-class-fg-color);
+}
+
+article .doc .doc-symbol.doc-symbol-attribute {
+	@apply border-(--doc-symbol-attribute-fg-color);
+}
+
+article .doc .doc-symbol.doc-symbol-method {
+	@apply border-(--doc-symbol-method-fg-color);
+}
+
+article .doc .doc-symbol.doc-symbol-module {
+	@apply border-(--doc-symbol-module-fg-color);
+}
+
+article .doc .doc-symbol.doc-symbol-function {
+	@apply border-(--doc-symbol-function-fg-color);
 }
