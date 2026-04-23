@@ -45,19 +45,53 @@ You can look at all the available options in the [python handler documentation](
 !!! warning "Important"
     If you do not define `show_root_heading`, the theme sets it to `true` by default.
 
-## Syntax
+## Examples
 
 ~~~md
 ::: shadcn.plugins.excalidraw.ExcalidrawPlugin
     options:
-        members: true
         heading_level: 3
         docstring_section_style: table
+        members: true
+        inherited_members: true
+        merge_init_into_class: true
 ~~~
+
+
 
 ::: shadcn.plugins.excalidraw.ExcalidrawPlugin
     options:
-        members: true
         heading_level: 3
         docstring_section_style: table
+        members: true
+        inherited_members: true
+        merge_init_into_class: true
+
+~~~md
+::: shadcn.plugins._router.RouterMixin
+    options:
+        heading_level: 3
+        show_symbol_type_heading: true
+~~~
+
+
+::: shadcn.plugins._router.RouterMixin
+    options:
+        heading_level: 3
+        
+
+~~~md
+::: shadcn.utils
+    options:
+        heading_level: 3
+        members: true
+        show_symbol_type_heading: true
+~~~
+
+
+::: shadcn.utils
+    options:
+        heading_level: 3
+        show_symbol_type_heading: true
+
 
