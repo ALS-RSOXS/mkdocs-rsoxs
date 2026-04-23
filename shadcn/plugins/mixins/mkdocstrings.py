@@ -36,6 +36,5 @@ class MkdocstringsMixin(Mixin):
                     "Setting 'show_root_heading' to True for mkdocstrings python handler."
                 )
                 deep_merge(plugin.config, MKDOCSTRINGS_CONFIG)
-                print("Merged mkdocstrings config:", plugin.config)
 
         return super().on_config(config)
