@@ -5,7 +5,7 @@ show_title: true
 show_stargazers: true
 pygments_style:
   light: shadcn-light
-  dark: github-dark
+  dark: one-dark
 topbar_sections: false
 katex_options: null
 show_datetime: false

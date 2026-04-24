@@ -59,15 +59,15 @@ article ol {
 }
 
 article pre {
-	@apply block mb-4 mt-6 max-h-[650px] rounded-xl py-4 px-4;
+	@apply text-[var(--color-code-foreground)] bg-[var(--color-code)] border border-als-finch-neutral-border/70 block mb-5 mt-7 max-h-[680px] rounded-xl px-4 py-3.5 shadow-sm overflow-auto;
 }
 
 article > pre {
-	@apply bg-muted;
+	@apply bg-[var(--color-code)];
 }
 
 article pre code {
-	@apply relative font-mono text-sm not-italic;
+	@apply relative block font-mono text-[0.9rem] leading-6 not-italic;
 }
 
 article pre code > span {
@@ -75,7 +75,7 @@ article pre code > span {
 }
 
 article code:not(pre code) {
-	@apply bg-muted relative rounded-md px-[0.3rem] py-[0.2rem] font-mono text-[0.8rem] outline-none;
+	@apply text-[var(--color-code-foreground)] bg-[var(--color-code)] border border-als-finch-neutral-border/65 relative rounded-md px-[0.36rem] py-[0.2rem] font-mono text-[0.82rem] outline-none;
 }
 
 article tr td.linenos pre {
