@@ -7,7 +7,7 @@ from mkdocs.structure.files import Files
 from mkdocs.structure.nav import Navigation, Section
 from mkdocs.structure.pages import Page
 
-from shadcn.plugins.mixins.base import Mixin
+from mkdocs_rsoxs.plugins.mixins.base import Mixin
 
 ORDER_META_KEY = "order"
 
@@ -53,11 +53,7 @@ class OrderMixin(Mixin):
         # from the title. It is a common hack to have the folders ordered in the navigation
         rex = re.compile(r"^[0-9]+[ _]")
         for item in nav.items:
-            if (
-                isinstance(item, Section)
-                and item.title
-                and rex.match(item.title)
-            ):
+            if isinstance(item, Section) and item.title and rex.match(item.title):
                 item.title = rex.sub("", item.title).capitalize()
 
         # save the nav order for later use

@@ -120,9 +120,7 @@ class ExcalidrawPlugin(RouterMixin, BasePlugin[ExcalidrawPluginConfig]):
             f"with configuration: {extension_config}"
         )
         config["markdown_extensions"].append("shadcn.extensions.excalidraw")
-        config["mdx_configs"]["shadcn.extensions.excalidraw"] = (
-            extension_config
-        )
+        config["mdx_configs"]["shadcn.extensions.excalidraw"] = extension_config
         # create directory
         log.debug(f"creating excalidraw directory: {excalidraw_path}")
         os.makedirs(excalidraw_path, exist_ok=True)

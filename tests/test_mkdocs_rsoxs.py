@@ -1,7 +1,5 @@
 """Tests for mkdocs_rsoxs."""
 
-from typer.testing import CliRunner
-
 from mkdocs_rsoxs import __version__
 
 

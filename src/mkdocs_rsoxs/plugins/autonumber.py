@@ -32,9 +32,7 @@ class AutoNumberPluginConfig(Config):
     )
 
     def label_pattern(self) -> re.Pattern:
-        pattern = (
-            f"[{{]#({'|'.join(self.prefixes.keys())}):([a-zA-Z0-9._-]+)[}}]"
-        )
+        pattern = f"[{{]#({'|'.join(self.prefixes.keys())}):([a-zA-Z0-9._-]+)[}}]"
         return re.compile(pattern)
 
     def reference_pattern(self) -> re.Pattern:
@@ -77,7 +75,7 @@ class AutoNumberPlugin(BasePlugin[AutoNumberPluginConfig]):
     ):
 
         # init counters for this page
-        counters = {prefix: 0 for prefix in self.config.prefixes.keys()}
+        counters = dict.fromkeys(self.config.prefixes.keys(), 0)
         for match in self.label_pattern.finditer(markdown):
             full_match: str = match.group(0)
             prefix: str = match.group(1)

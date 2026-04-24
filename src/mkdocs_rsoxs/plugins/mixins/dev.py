@@ -3,7 +3,7 @@ from mkdocs.config.defaults import MkDocsConfig
 from mkdocs.plugins import get_plugin_logger
 from mkdocs.structure.files import Files
 
-from shadcn.plugins.mixins.base import Mixin
+from mkdocs_rsoxs.plugins.mixins.base import Mixin
 
 logger = get_plugin_logger("mixins/dev")
 

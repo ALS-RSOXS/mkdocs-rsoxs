@@ -29,9 +29,7 @@ def iconify(key: str, height: str = "20px", **kwargs) -> str:
     req = urllib.request.Request(url, headers={"User-Agent": "mkdocs-shadcn"})
     try:
         with urllib.request.urlopen(req) as response:
-            return response.read().decode(
-                "utf-8"
-            )  # Convert to string if needed
+            return response.read().decode("utf-8")  # Convert to string if needed
     except URLError as err:
         logger.error(f"fail to call iconify api: {err} ({url})")
 

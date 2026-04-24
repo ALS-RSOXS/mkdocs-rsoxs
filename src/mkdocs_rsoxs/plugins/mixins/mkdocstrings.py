@@ -3,8 +3,8 @@ from collections.abc import Mapping
 from mkdocs.config.defaults import MkDocsConfig
 from mkdocs.plugins import get_plugin_logger
 
-from shadcn.plugins.mixins.base import Mixin
-from shadcn.utils import deep_merge
+from mkdocs_rsoxs.plugins.mixins.base import Mixin
+from mkdocs_rsoxs.utils import deep_merge
 
 MKDOCSTRINGS_CONFIG: Mapping = {
     "handlers": {
@@ -26,9 +26,7 @@ class MkdocstringsMixin(Mixin):
         if plugin:
             logger.info("Mkdocstrings mixin activated.")
             options = (
-                plugin.config.get("handlers", {})
-                .get("python", {})
-                .get("options", {})
+                plugin.config.get("handlers", {}).get("python", {}).get("options", {})
             )
             show_root_heading = options.get("show_root_heading", None)
             if show_root_heading is None:

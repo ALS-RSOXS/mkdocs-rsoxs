@@ -22,7 +22,7 @@ class RsoxsJinjaPlugin(BasePlugin):
         /,
         *,
         config: MkDocsConfig,
-        files: Files,  # noqa: ARG002
+        files: Files,
     ):
         env.filters["file_exists"] = partial(file_exists, config=config)
         env.filters["is_http_url"] = is_http_url

@@ -6,7 +6,7 @@ from mkdocs.plugins import get_plugin_logger
 from mkdocs.structure.files import Files
 from mkdocs.structure.pages import Page
 
-from shadcn.plugins.mixins.base import Mixin
+from mkdocs_rsoxs.plugins.mixins.base import Mixin
 
 REPO_CONFIG_KEY = "git_repository"
 CREATED_AT_META_KEY = "created_at"
@@ -62,14 +62,10 @@ class GitTimestampsMixin(Mixin):
             if isinstance(repo, Repo) and page.file.abs_src_path:
                 dates = [
                     commit.committed_datetime
-                    for commit in repo.iter_commits(
-                        paths=page.file.abs_src_path
-                    )
+                    for commit in repo.iter_commits(paths=page.file.abs_src_path)
                 ]
                 if len(dates) > 0:
                     page.meta[CREATED_AT_META_KEY] = dates[-1]
                     page.meta[UPDATED_AT_META_KEY] = dates[0]
 
-        return super().on_page_markdown(
-            markdown, page=page, config=config, files=files
-        )
+        return super().on_page_markdown(markdown, page=page, config=config, files=files)

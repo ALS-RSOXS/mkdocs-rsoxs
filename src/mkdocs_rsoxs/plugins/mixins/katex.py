@@ -7,7 +7,7 @@ from mkdocs.plugins import get_plugin_logger
 from mkdocs.structure.files import Files
 from mkdocs.structure.pages import Page
 
-from shadcn.plugins.mixins.base import Mixin
+from mkdocs_rsoxs.plugins.mixins.base import Mixin
 
 logger = get_plugin_logger("mixins/katex")
 
@@ -65,17 +65,13 @@ class KatexMixin(Mixin):
             return super().on_files(files, config)
 
         for file in files:
-            if not (
-                file.is_documentation_page and file.src_path.endswith(".md")
-            ):
+            if not (file.is_documentation_page and file.src_path.endswith(".md")):
                 continue
 
             try:
                 markdown = file.content_string
             except Exception as e:
-                logger.warning(
-                    f"Could not read content of file '{file.src_path}': {e}"
-                )
+                logger.warning(f"Could not read content of file '{file.src_path}': {e}")
                 continue
 
             for match in LABEL_PATTERN.finditer(markdown):
@@ -90,24 +86,21 @@ class KatexMixin(Mixin):
                         len(self.katex_mixin_labels) + 1
                     )  # starts with 1
 
-                    href = (
-                        urljoin(config.site_url or "/", file.dest_uri)
-                        + f"#{label}"
-                    )
+                    href = urljoin(config.site_url or "/", file.dest_uri) + f"#{label}"
                     if self.katex_mixin_use_links:
                         self.katex_mixin_translations[f"\\ref{{{label}}}"] = (
                             f"(\\href{{{href}}}{{{self.katex_mixin_labels[label]}}})"
                         )
-                        self.katex_mixin_translations[
-                            f"\\label{{{label}}}"
-                        ] = f"\\htmlId{{{label}}}{{\\tag{{{self.katex_mixin_labels[label]}}}}}"
+                        self.katex_mixin_translations[f"\\label{{{label}}}"] = (
+                            f"\\htmlId{{{label}}}{{\\tag{{{self.katex_mixin_labels[label]}}}}}"
+                        )
                     else:
                         self.katex_mixin_translations[f"\\ref{{{label}}}"] = (
                             f"({self.katex_mixin_labels[label]})"
                         )
-                        self.katex_mixin_translations[
-                            f"\\label{{{label}}}"
-                        ] = f"\\tag{{{self.katex_mixin_labels[label]}}}"
+                        self.katex_mixin_translations[f"\\label{{{label}}}"] = (
+                            f"\\tag{{{self.katex_mixin_labels[label]}}}"
+                        )
 
         return super().on_files(
             files=files,

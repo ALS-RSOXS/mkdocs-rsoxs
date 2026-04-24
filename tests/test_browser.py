@@ -1,15 +1,26 @@
 import json
 from collections import defaultdict
-from typing import Dict, List, Union
+from urllib.error import URLError
 from urllib.parse import urlparse, urlunparse
+from urllib.request import urlopen
 
-from conftest import BASE
+import pytest
 from playwright.sync_api import ConsoleMessage, Error, Page
 
-BrowserError = Union[ConsoleMessage, Error]
+from tests.conftest import BASE
+
+BrowserError = ConsoleMessage | Error
 
 
-def format_errors(errors_by_page: Dict[str, List[BrowserError]]) -> str:
+def is_base_reachable(url: str) -> bool:
+    try:
+        with urlopen(url, timeout=2):
+            return True
+    except (URLError, TimeoutError):
+        return False
+
+
+def format_errors(errors_by_page: dict[str, list[BrowserError]]) -> str:
     if len(errors_by_page) == 0:
         return ""
     out = ""
@@ -21,9 +32,7 @@ def format_errors(errors_by_page: Dict[str, List[BrowserError]]) -> str:
                     {
                         "text": e.text,
                         "url": e.location["url"] if e.location else "",
-                        "lineNumber": e.location["lineNumber"]
-                        if e.location
-                        else None,
+                        "lineNumber": e.location["lineNumber"] if e.location else None,
                         "columnNumber": e.location["columnNumber"]
                         if e.location
                         else None,
@@ -48,12 +57,15 @@ def format_errors(errors_by_page: Dict[str, List[BrowserError]]) -> str:
 
 # fixtures: see https://playwright.dev/python/docs/test-runners#fixtures
 def test_all_pages_no_browser_errors(page: Page):
+    if not is_base_reachable(BASE):
+        pytest.skip(f"Skipping browser crawl: {BASE} is not reachable")
+
     visited = set()
     to_visit = [BASE + "/"]
-    errors_by_page: Dict[str, List[BrowserError]] = defaultdict(list)
+    errors_by_page: dict[str, list[BrowserError]] = defaultdict(list)
 
     base_url = urlparse(BASE)
-    errors: List[BrowserError] = []
+    errors: list[BrowserError] = []
 
     def console_error_handler(msg: ConsoleMessage):
         if msg.type == "error":
@@ -82,18 +94,14 @@ def test_all_pages_no_browser_errors(page: Page):
             errors_by_page[url].extend(errors)
 
         # Collect internal links
-        anchors = page.eval_on_selector_all(
-            "a[href]", "els => els.map(e => e.href)"
-        )
+        anchors = page.eval_on_selector_all("a[href]", "els => els.map(e => e.href)")
         for href in anchors:
             normalized = urlparse(href)
             if normalized.scheme not in ["http", "https"]:
                 continue
             normalized = normalized._replace(fragment="")
             if normalized.path.endswith("/"):
-                normalized = normalized._replace(
-                    path=normalized.path + "index.html"
-                )
+                normalized = normalized._replace(path=normalized.path + "index.html")
             link = urlunparse(normalized)
             if normalized.netloc == base_url.netloc and link not in visited:
                 to_visit.append(link)

@@ -68,9 +68,7 @@ class HoverCardBlock(Block):
             )
 
         if self.options["class"]:
-            div.set(
-                "class", div.get("class", "") + " " + self.options["class"]
-            )
+            div.set("class", div.get("class", "") + " " + self.options["class"])
 
         return div
 
@@ -106,15 +104,11 @@ class HoverCardProcessor(InlineProcessor):
         if card_text.startswith("#"):
             # block case
             trigger.set("id", f"{HOVER_CARD_NAME}-{card_text[1:]}")
-            trigger.set(
-                "style", f"anchor-name: --{HOVER_CARD_NAME}-{card_text[1:]};"
-            )
+            trigger.set("style", f"anchor-name: --{HOVER_CARD_NAME}-{card_text[1:]};")
         else:
             card = etree.SubElement(trigger, "span")
             card.set("class", HOVER_CARD_NAME)
-            card.text = (
-                card_text  # inline markdown will be processed automatically
-            )
+            card.text = card_text  # inline markdown will be processed automatically
 
         return trigger, m.start(0), m.end(0)
 

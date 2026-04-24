@@ -76,6 +76,9 @@ jobs:
       - name: Install dependencies
         run: make install
 
+      - name: Install Playwright browser
+        run: uv run playwright install --with-deps chromium
+
       - name: Run tests with coverage
         run: make test-cov
 

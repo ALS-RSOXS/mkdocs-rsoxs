@@ -1,5 +1,6 @@
+from collections.abc import Callable, Iterable
 from functools import wraps
-from typing import Callable, List, Union
+from types import MethodType
 
 from bottle import Bottle
 from mkdocs.livereload import LiveReloadServer
@@ -19,7 +20,7 @@ class RouterMixin:
         self,
         path: str,
         handler: Callable,
-        method: Union[str, List[str]] = "GET",
+        method: str | list[str] = "GET",
     ):
         """Add a route to the router."""
         self.bottle.route(path, method=method)(handler)
@@ -29,7 +30,9 @@ class RouterMixin:
         original = server._serve_request
 
         @wraps(original)
-        def _serve_request(environ, start_response):
+        def _serve_request(
+            server_self, environ, start_response
+        ) -> Iterable[bytes] | None:
             # put priority to base routes
             result = original(environ, start_response)
             if result is not None:
@@ -38,7 +41,7 @@ class RouterMixin:
             return self.bottle.wsgi(environ, start_response)
 
         # monkey patch the _serve_request method of the server
-        setattr(server, "_serve_request", _serve_request)
+        setattr(server, "_serve_request", MethodType(_serve_request, server))
 
     def on_serve(self, server: LiveReloadServer, /, *, config, builder):
         """This method is called when the server is started. At the end of the mkdocs

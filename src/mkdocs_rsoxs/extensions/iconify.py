@@ -3,9 +3,7 @@ from markdown.inlinepatterns import InlineProcessor
 
 from mkdocs_rsoxs.filters import iconify
 
-ICONIFY_TAG_RE = (
-    r"[+]([a-z0-9\-]+:[a-z0-9\-]+)(?:[;][a-z]+[=][0-9a-zA-Z.#%]+)*[+]"
-)
+ICONIFY_TAG_RE = r"[+]([a-z0-9\-]+:[a-z0-9\-]+)(?:[;][a-z]+[=][0-9a-zA-Z.#%]+)*[+]"
 
 
 class IconifyInlinePattern(InlineProcessor):
@@ -19,6 +17,8 @@ class IconifyInlinePattern(InlineProcessor):
         icon_id = m.group(1).strip("+")
         raw_svg = iconify(icon_id, **params)
         raw_svg = raw_svg.replace(r"<svg", r'<svg class="iconify"')
+        if self.md is None:
+            return raw_svg, m.start(0), m.end(0)
         placeholder = self.md.htmlStash.store(raw_svg)
         return placeholder, m.start(0), m.end(0)
 

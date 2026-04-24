@@ -6,7 +6,7 @@ from mkdocs.contrib.search import SearchPlugin as BaseSearchPlugin
 from mkdocs.structure.files import Files
 from mkdocs.structure.pages import Page
 
-from shadcn.filters import (
+from mkdocs_rsoxs.filters import (
     active_section,
     file_exists,
     first_page,
@@ -15,13 +15,13 @@ from shadcn.filters import (
     parse_author,
     setattribute,
 )
-from shadcn.plugins.mixins.dev import DevServerMixin
-from shadcn.plugins.mixins.git import GitTimestampsMixin
-from shadcn.plugins.mixins.katex import KatexMixin
-from shadcn.plugins.mixins.markdown import MarkdownMixin
-from shadcn.plugins.mixins.mkdocstrings import MkdocstringsMixin
-from shadcn.plugins.mixins.order import OrderMixin
-from shadcn.plugins.mixins.table import TableMixin
+from mkdocs_rsoxs.plugins.mixins.dev import DevServerMixin
+from mkdocs_rsoxs.plugins.mixins.git import GitTimestampsMixin
+from mkdocs_rsoxs.plugins.mixins.katex import KatexMixin
+from mkdocs_rsoxs.plugins.mixins.markdown import MarkdownMixin
+from mkdocs_rsoxs.plugins.mixins.mkdocstrings import MkdocstringsMixin
+from mkdocs_rsoxs.plugins.mixins.order import OrderMixin
+from mkdocs_rsoxs.plugins.mixins.table import TableMixin
 
 
 class SearchPlugin(
