@@ -9,7 +9,7 @@ extra:
   als_group:
     full_name: ALS RSOXS Group Project
     acronym: REIXS
-    github_url: https://github.com/ALS-RSOXS
+    github_url: https://github.com/als-rsoxs
     reixs_url: https://als.lbl.gov/science/photon-science-programs/rixs-program/
 
 theme:
