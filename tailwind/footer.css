@@ -1,3 +1,105 @@
 footer a {
-	@apply font-medium underline underline-offset-4;
+	@apply font-medium;
+}
+
+.footer-rsoxs {
+	@apply border-t border-als-finch-neutral-border/60 text-muted-foreground dark:text-als-slate-light flex flex-col gap-7 text-sm;
+}
+
+.footer-rsoxs__grid {
+	@apply rounded-xl border border-als-finch-neutral-border/60 bg-als-finch-surface/25 p-5 grid grid-cols-1 gap-8 md:grid-cols-[1.35fr_0.75fr] sm:p-6 dark:border-white/15 dark:bg-[#111a2a]/78;
+}
+
+.footer-rsoxs__section {
+	@apply min-w-0;
+}
+
+.footer-rsoxs__brand {
+	@apply flex items-center gap-2.5;
+}
+
+.footer-rsoxs__logo {
+	@apply text-foreground h-12 w-28 shrink-0 rounded-md flex items-center;
+}
+
+.footer-rsoxs__logo svg {
+	@apply h-full w-auto;
+}
+
+.footer-rsoxs__logo img {
+	@apply h-full w-auto max-w-full;
+}
+
+.footer-rsoxs__logo .als-brand-icon.als-brand-icon--light,
+.footer-rsoxs__logo .als-brand-icon.als-brand-icon--dark {
+	display: none;
+}
+
+html:not(.dark) .footer-rsoxs__logo .als-brand-icon--light {
+	display: block;
+}
+
+html.dark .footer-rsoxs__logo .als-brand-icon--dark {
+	display: block;
+}
+
+.footer-rsoxs__logo .als-brand-icon--only {
+	display: block;
+}
+
+.footer-rsoxs__title-wrap {
+	@apply min-w-0;
+}
+
+.footer-rsoxs__title {
+	@apply text-foreground m-0 text-[1.8rem] font-semibold leading-tight tracking-tight dark:text-white;
+}
+
+.footer-rsoxs__subtitle {
+	@apply m-0 text-sm text-muted-foreground dark:text-als-slate-light/90;
+}
+
+.footer-rsoxs__heading {
+	@apply text-foreground mb-2 text-base font-semibold tracking-tight dark:text-white;
+}
+
+.footer-rsoxs__socials {
+	@apply mt-4 flex items-center gap-3;
+}
+
+.footer-rsoxs__social-link {
+	@apply inline-flex items-center gap-2 rounded-lg border border-als-finch-neutral-border/70 px-3 py-1.5 no-underline hover:bg-als-sky-light/10 hover:border-als-sky-light/40 transition-colors dark:border-white/22 dark:bg-white/3 dark:hover:bg-white/10 dark:hover:border-white/35;
+}
+
+.footer-rsoxs__social-icon {
+	@apply h-4 w-4 shrink-0;
+}
+
+.footer-rsoxs__body {
+	@apply mb-0 mt-3 leading-relaxed;
+}
+
+.footer-rsoxs__links {
+	@apply mt-1 flex flex-col gap-1.5;
+}
+
+.footer-rsoxs__links a {
+	@apply text-muted-foreground hover:text-foreground transition-colors inline-flex items-center gap-2 rounded-md px-2 py-1 -mx-2 dark:text-als-slate-light dark:hover:text-white;
+}
+
+.footer-rsoxs__links a::before {
+	content: "";
+	@apply h-1 w-1 rounded-full bg-als-sky-dark/55;
+}
+
+.footer-rsoxs__links--stack {
+	@apply gap-2.5;
+}
+
+.footer-rsoxs__bottom {
+	@apply border-t border-als-finch-neutral-border/60 pt-4 px-1 flex flex-col gap-2 text-xs sm:text-sm;
+}
+
+.footer-rsoxs__bottom-links {
+	@apply text-muted-foreground dark:text-als-slate-light/95 leading-relaxed max-w-5xl;
 }

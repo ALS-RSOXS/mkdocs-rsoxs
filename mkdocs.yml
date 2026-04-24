@@ -5,6 +5,13 @@ repo_url: https://github.com/als-rsoxs/mkdocs-rsoxs
 repo_name: als-rsoxs/mkdocs-rsoxs
 edit_uri: edit/main/docs/
 
+extra:
+  als_group:
+    full_name: ALS RSOXS Group Project
+    acronym: REIXS
+    github_url: https://github.com/ALS-RSOXS
+    reixs_url: https://als.lbl.gov/science/photon-science-programs/rixs-program/
+
 theme:
   name: rsoxs
   show_title: true
@@ -52,5 +59,7 @@ markdown_extensions:
 
 nav:
   - Home: index.md
+  - Configuration: configuration.md
   - API Reference: api.md
+  - API Docs Best Practices: api-docs-best-practices.md
   - Contributing: contributing.md

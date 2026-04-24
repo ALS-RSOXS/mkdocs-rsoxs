@@ -6,3 +6,5 @@
 ## Learned Workspace Facts
 - This repository builds a custom `mkdocs` theme oriented to ALS design-system styling.
 - Transcript memory state is tracked at `.cursor/hooks/state/continual-learning-index.json`.
+- The `rsoxs` MkDocs plugin reads `pyproject.toml` project metadata and exposes it under `config.extra.project_meta` for templates and docs.
+- ALS group metadata is configured via `mkdocs.yml` `extra.als_group` and is consumed by footer/template rendering.
