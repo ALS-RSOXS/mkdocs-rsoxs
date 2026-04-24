@@ -1,56 +1,160 @@
-[project]
-name = "mkdocs-shadcn"
-version = "0.10.5"
-description = "Documentation that also shines"
-authors = [
-    { name = "Alban Siffer", email = "31479857+asiffer@users.noreply.github.com" },
-]
-readme = "README.md"
-requires-python = ">=3.8"
-dependencies = [
-    "mkdocs>=1.6.1",
-    "bottle>=0.13.2",
-    "pymdown-extensions>=10.14.3",
-    "gitpython>=3.1.45",
-]
-
-[dependency-groups]
-dev = [
-    "accessible-pygments>=0.0.4",
-    "mkdocstrings[python]>=0.26.1",
-    "mypy>=1.12.0",
-    "pre-commit>=3.5.0",
-    "pygments>=2.19.1",
-    "pymdown-extensions>=10.14.2",
-    "pytest-playwright>=0.5.2",
-    "ruff>=0.12.11",
-    "ty>=0.0.1a21",
-    "types-markdown>=3.7.0.20241204",
-    "types-pygments>=2.19.0.20250107",
-]
-
-[project.entry-points."mkdocs.themes"]
-shadcn = "shadcn"
-
-[project.entry-points."mkdocs.plugins"]
-"shadcn/search" = "shadcn.plugins.search:SearchPlugin"
-"shadcn/excalidraw" = "shadcn.plugins.excalidraw:ExcalidrawPlugin"
-"shadcn/autonumber" = "shadcn.plugins.autonumber:AutoNumberPlugin"
-
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 
+[project]
+name = "mkdocs_rsoxs"
+version = "0.1.0"
+description = "A mkdocs theme for als rsoxs projects"
+readme = "README.md"
+license = "GPL-3.0"
+requires-python = ">=3.13"
+authors = [
+    { name = "Harlan D Heilman", email = "73567020+HarlanHeilman@users.noreply.github.com" },
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Typing :: Typed",
+]
+keywords = []
+dependencies = [
+    "mkdocs>=1.6.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0.0",
+    "pytest-cov>=7.0.0",
+    "ruff>=0.14.14",
+    "ty>=0.0.14",
+    "hatch>=1.16.3",
+    "prek>=0.1.0",
+    "pysentry-rs>=0.1.0",
+]
+docs = [
+    "mkdocstrings-python>=2.0.1",
+    "pymdown-extensions>=10.0.0",
+]
+
+[project.entry-points."mkdocs.themes"]
+rsoxs = "mkdocs_rsoxs"
+
+[project.entry-points."mkdocs.plugins"]
+rsoxs = "mkdocs_rsoxs.jinja_plugin:RsoxsJinjaPlugin"
+
+[project.urls]
+Homepage = "https://github.com/als-rsoxs/mkdocs-rsoxs"
+Documentation = "https://als-rsoxs.github.io/mkdocs-rsoxs"
+Repository = "https://github.com/als-rsoxs/mkdocs-rsoxs"
+Issues = "https://github.com/als-rsoxs/mkdocs-rsoxs/issues"
+Changelog = "https://github.com/als-rsoxs/mkdocs-rsoxs/blob/main/CHANGELOG.md"
+
+# =============================================================================
+# Hatch
+# =============================================================================
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "/src",
+]
+
 [tool.hatch.build.targets.wheel]
-packages = ["shadcn"]
+packages = ["src/mkdocs_rsoxs"]
+
+# Matrix testing across Python versions
+[tool.hatch.envs.test]
+
+[[tool.hatch.envs.test.matrix]]
+python = ["3.10", "3.11", "3.12", "3.13"]
+
+# =============================================================================
+# Ruff
+# =============================================================================
 
 [tool.ruff]
-target-version = "py38"
-line-length = 79
+target-version = "py313"
+line-length = 88
+src = ["src", "tests"]
 
-[tool.ruff.format]
-docstring-code-format = true
-docstring-code-line-length = 79
+[tool.ruff.lint]
+select = [
+    "E",      # pycodestyle errors
+    "W",      # pycodestyle warnings
+    "F",      # Pyflakes
+    "I",      # isort
+    "B",      # flake8-bugbear
+    "C4",     # flake8-comprehensions
+    "UP",     # pyupgrade
+    "ARG",    # flake8-unused-arguments
+    "SIM",    # flake8-simplify
+    "TCH",    # flake8-type-checking
+    "PTH",    # flake8-use-pathlib
+    "ERA",    # eradicate
+    "RUF",    # Ruff-specific rules
+]
 
-[tool.ty.environment]
-python-version = "3.8"
+[tool.ruff.lint.isort]
+known-first-party = ["mkdocs_rsoxs"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*.py" = ["ARG001"]
+
+# =============================================================================
+# ty (Astral type checker)
+# =============================================================================
+
+[tool.ty.src]
+include = ["**/*.py"]
+
+# =============================================================================
+# Pytest
+# =============================================================================
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = [
+    "-ra",
+    "-q",
+    "--strict-markers",
+    "--strict-config",
+]
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+]
+
+# =============================================================================
+# Coverage
+# =============================================================================
+
+[tool.coverage.run]
+source = ["src/mkdocs_rsoxs"]
+branch = true
+parallel = true
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+    "@abstractmethod",
+]
+show_missing = true
+
+# =============================================================================
+# git-cliff (Changelog generation)
+# =============================================================================
+
+[tool.git-cliff]
+config = "cliff.toml"

@@ -1,0 +1,18 @@
+:root {
+  --als-sky-darkest: #073048;
+  --als-sky-dark: #004C70;
+  --als-sky-mid: #095B87;
+  --als-sky-light: #0886CA;
+  --als-slate-dark: #464B53;
+  --als-slate-deep: #334256;
+  --als-slate-mid: #64768D;
+  --als-slate-light: #C1D3E3;
+  --als-finch-border: #004B71;
+  --als-finch-border-hover: #52BEE2;
+  --als-finch-surface: #F0F5F9;
+  --als-finch-neutral-border: #CED7DC;
+  --als-finch-slate-blue: #7DA9CD;
+  --als-finch-sky-hover: #9ACFFC;
+  --als-finch-charcoal: #47484A;
+  --als-finch-navy-deep: #0E3B55;
+}

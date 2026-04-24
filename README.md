@@ -1,113 +1,108 @@
+# mkdocs-rsoxs
 
-![banner](./.github/assets/banner.png)
+[![CI](https://github.com/als-rsoxs/mkdocs-rsoxs/actions/workflows/ci.yml/badge.svg)](https://github.com/als-rsoxs/mkdocs-rsoxs/actions/workflows/ci.yml)
+[![PyPI version](https://badge.fury.io/py/mkdocs_rsoxs.svg)](https://badge.fury.io/py/mkdocs_rsoxs)
+[![codecov](https://codecov.io/gh/als-rsoxs/mkdocs-rsoxs/branch/main/graph/badge.svg)](https://codecov.io/gh/als-rsoxs/mkdocs-rsoxs)
+[![Python 3.13+](https://img.shields.io/badge/python-3.13+-blue.svg)](https://www.python.org/downloads/)
+[![uv](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json)](https://github.com/astral-sh/uv)
+[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
+[![ty](https://img.shields.io/badge/type--checked-ty-blue?labelColor=orange)](https://github.com/astral-sh/ty)
+[![License: GPL-3.0](https://img.shields.io/badge/License-GPL--3.0-yellow.svg)](https://github.com/als-rsoxs/mkdocs-rsoxs/blob/main/LICENSE)
+[![Renovate](https://img.shields.io/badge/renovate-enabled-brightgreen.svg?logo=renovate)](https://renovateapp.com/)
 
-<p align="center">
-  <a href="https://github.com/squidfunk/mkdocs-shadcn/actions"><img
-    src="https://github.com/asiffer/mkdocs-shadcn/actions/workflows/testing.yaml/badge.svg"
-    alt="Testing"
-  /></a>
-  <a href="https://pypistats.org/packages/mkdocs-shadcn"><img
-    src="https://img.shields.io/pypi/dm/mkdocs-shadcn.svg"
-    alt="Downloads"
-  /></a>
-  <a href="https://pypi.org/project/mkdocs-shadcn"><img
-    src="https://img.shields.io/pypi/v/mkdocs-shadcn.svg"
-    alt="Python Package Index"
-  /></a>
-</p>
+A mkdocs theme for als rsoxs projects
 
+## Features
 
-![screenshot](./.github/assets/screenshot.png)
+- Fast and modern Python toolchain using Astral's tools (uv, ruff, ty)
+- Type-safe with full type annotations
+- Comprehensive documentation with MkDocs — [View Docs](https://als-rsoxs.github.io/mkdocs-rsoxs/)
 
+## Installation
 
-> [!IMPORTANT]  
-> This is an unofficial port of shadcn/ui to MkDocs, and is not affiliated with [@shadcn](https://twitter.com/shadcn).
-
-
-## Documentation
-
-Yes, yes, the [documentation](https://asiffer.github.io/mkdocs-shadcn/) is built with this theme.
-
-## Quick start
-
-`mkdocs-shadcn` can be installed with `pip`
-
-```shell
-pip install mkdocs-shadcn
+```bash
+pip install mkdocs_rsoxs
 ```
 
-Add the following line to `mkdocs.yml`:
+Or using uv (recommended):
 
-```yaml
-theme:
-  name: shadcn
+```bash
+uv add mkdocs_rsoxs
 ```
 
-## Extensions
+## Quick Start
 
-The theme tries to support the built-in extensions along with some `pymdownx` ones. 
+```python
+import mkdocs_rsoxs
 
-- [x] [`admonition`](https://python-markdown.github.io/extensions/admonition/)
-- [x] [`codehilite`](https://python-markdown.github.io/extensions/code_hilite/)
-- [x] [`fenced_code`](https://python-markdown.github.io/extensions/fenced_code_blocks/)
-- [x] [`footnotes`](https://python-markdown.github.io/extensions/footnotes/)
-- [x] [`pymdownx.tabbed`](https://facelessuser.github.io/pymdown-extensions/extensions/tabbed/)
-- [x] [`pymdownx.blocks.details`](https://facelessuser.github.io/pymdown-extensions/extensions/blocks/plugins/details/) 
-- [x] [`pymdownx.blocks.tab`](https://facelessuser.github.io/pymdown-extensions/extensions/blocks/plugins/tab/) 
-- [x] [`pymdownx.progressbar`](https://facelessuser.github.io/pymdown-extensions/extensions/progressbar/)
-- [x] [`pymdownx.arithmatex`](https://facelessuser.github.io/pymdown-extensions/extensions/arithmatex/)
-- [x] builtin [`shadcn.echarts`](https://asiffer.github.io/mkdocs-shadcn/extensions/echarts/)
-- [x] builtin [`shadcn.iconify`](https://asiffer.github.io/mkdocs-shadcn/extensions/iconify/)
-- [x] builtin [`shadcn.codexec`](https://asiffer.github.io/mkdocs-shadcn/extensions/codexec/) 
+print(mkdocs_rsoxs.__version__)
+```
 
+## Development
 
-## Plugins
+### Prerequisites
 
-- [x] builtin [`excalidraw`](https://excalidraw.com/) - With this plugin, you can directly edit your excalidraw scene in dev mode (kind of WYSIWYG) while it is rendered as svg at build time.
-- [x] [`mkdocstrings`](https://mkdocstrings.github.io/) - a MkDocs plugin for auto-generating API documentation from docstrings. (alpha)
-
-## Developers
-
-This project is open to contributions. In general, we need to apply the shadcn/ui style to already existing plugins or extensions. 
-
-We recently release the css sources we use to style the theme. It mainly uses [`tailwindcss`](https://tailwindcss.com/).
+- Python 3.13+
+- [uv](https://docs.astral.sh/uv/) for package management
 
 ### Setup
 
-First clone the repo:
-```shell
-git clone https://github.com/asiffer/mkdocs-shadcn
-cd mkdocs-shadcn
+```bash
+git clone https://github.com/als-rsoxs/mkdocs-rsoxs.git
+cd mkdocs-rsoxs
+make install
 ```
 
-Then you can install python dependencies ([`uv`](https://docs.astral.sh/uv/) required):
-```shell
-uv sync --all-extras
+### Running Tests
+
+```bash
+make test
+
+# With coverage
+make test-cov
+
+# Across all Python versions
+make test-matrix
 ```
 
-Finally, you can install tailwind with your favourite package manager (npm, yarn, bun, etc.):
+### Code Quality
 
-```shell
-bun install
+```bash
+# Run all checks (lint, format, type-check)
+make verify
+
+# Auto-fix lint and format issues
+make fix
 ```
 
-### Dev mode
+### Prek
 
-We use the project pages to as a test project for this theme. You can run the local server in the `pages/` subdirectory.
-
-```shell
-cd pages/
-uv run mkdocs serve --watch-theme -w ..
+```bash
+prek install
+prek run --all-files
 ```
 
-In parallel, you are likely to run the tailwind watcher to compile the css sources. In the root folder:
+### Documentation
 
-```shell
-bun dev
+The `rsoxs` MkDocs theme ships default ALS header icons and favicon under `src/mkdocs_rsoxs/img/`. Rebuild CSS with `bun run build` (or `make docs-assets`) when you change Tailwind sources.
+
+In your `mkdocs.yml`, add the theme’s Jinja plugin so filters such as `file_exists` resolve theme static files:
+
+```yaml
+plugins:
+  - rsoxs
+  - search
 ```
 
-### Testing
+```bash
+make docs-serve
+```
+## Dependency Updates
 
-Tests are managed by [`pytest`](https://docs.pytest.org/en/stable/) and are located in the [tests/](./tests/) folder.
+This project uses [Renovate](https://renovateapp.com/) to keep dependencies up to date automatically. Renovate will open pull requests when new versions of dependencies are available.
 
-Currently we only test that there is no browser issue through [playwright](https://playwright.dev/).
+To enable it, install the [Renovate GitHub App](https://github.com/apps/renovate) and grant it access to this repository.
+
+## License
+
+This project is licensed under the GPL-3.0 License - see the [LICENSE](LICENSE) file for details.
