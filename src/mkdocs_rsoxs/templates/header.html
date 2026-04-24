@@ -1,9 +1,14 @@
-<header class="bg-background sticky top-0 z-50 w-full" view-transition-name="header">
-    <div class="container-wrapper 3xl:fixed:px-0 px-6">
-        <div class="3xl:fixed:container flex h-(--header-height) items-center gap-2 **:data-[slot=separator]:!h-4">
+<header
+    class="header-rsoxs bg-background/95 supports-[backdrop-filter]:bg-background/80 sticky top-0 z-50 w-full border-b border-als-finch-neutral-border/50 shadow-[0_1px_0_0_rgba(7,48,72,0.04)] backdrop-blur-sm dark:border-white/8 dark:shadow-[0_1px_0_0_rgba(0,0,0,0.25)]"
+    view-transition-name="header"
+>
+    <div class="container-wrapper 3xl:fixed:px-0 px-4 sm:px-6">
+        <div
+            class="3xl:fixed:container flex h-(--header-height) w-full min-w-0 max-w-full items-center justify-start gap-2 **:data-[slot=separator]:!h-4"
+        >
             <button id="menu-button" data-slot="popover-trigger" onclick="onMobileMenuButtonClick(event)"
                 class="group whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive hover:text-accent-foreground px-4 py-2 has-[&gt;svg]:px-3 extend-touch-target h-8 touch-manipulation items-center justify-start gap-2.5 !p-0 hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 active:bg-transparent dark:hover:bg-transparent flex lg:hidden"
-                type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-«Rmplb»"
+                type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="bottom-sidebar"
                 data-state="closed">
                 <div class="relative flex h-8 w-4 items-center justify-center">
                     <div class="relative size-4">
@@ -19,11 +24,12 @@
 
                     <span class="sr-only">Toggle Menu</span>
                 </div>
-                <span class="flex h-8 items-center text-lg leading-none font-medium">Menu</span>
             </button>
-            <a data-slot="button"
-                class="items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-5 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50 hidden h-8 lg:flex"
-                href="{{ config.site_url }}">
+            <a
+                data-slot="button"
+                class="header-rsoxs__brand text-foreground group/header-brand focus-visible:ring-als-sky-light/30 relative -my-0.5 box-border hidden h-8 w-fit min-w-0 max-w-none shrink-0 grow-0 basis-auto items-center justify-start gap-1.5 overflow-hidden whitespace-nowrap rounded-lg px-2.5 py-0.5 text-left text-sm font-medium transition-all hover:bg-als-finch-surface/80 focus-visible:ring-[3px] focus-visible:outline-none dark:hover:bg-als-slate-deep/50 lg:inline-flex"
+                href="{{ config.site_url }}"
+            >
                 {% if (config.theme.icon and config.theme.icon_light)
                   and ((config.theme.icon | file_exists) or (config.theme.icon | is_http_url))
                   and ((config.theme.icon_light | file_exists) or (config.theme.icon_light | is_http_url)) %}
@@ -39,7 +45,11 @@
                 {% endif %}
 
                 {% if config.theme.show_title %}
-                <h1 class="pr-2">{{ config.site_name }}</h1>
+                <span
+                    class="header-rsoxs__title text-als-sky-darkest w-auto min-w-0 max-w-[30ch] overflow-hidden text-ellipsis shrink font-semibold tracking-tight dark:text-als-slate-light"
+                >
+                    {{ config.site_name }}
+                </span>
                 {% endif %}
             </a>
             {% if config.theme.topbar_sections %}

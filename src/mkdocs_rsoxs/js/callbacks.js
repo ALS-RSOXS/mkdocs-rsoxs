@@ -87,18 +87,51 @@ const onBottomSidebarDialogClick = (event) => {
 		const button = document.getElementById("menu-button");
 		if (button) {
 			button.dataset.state = "closed";
+			button.setAttribute("aria-expanded", "false");
 		}
 	}
 };
 
-const onMobileMenuButtonClick = (event) => {
-	event.currentTarget.dataset.state =
-		event.target.dataset.state === "open" ? "closed" : "open";
+const isMobileMenuViewport = () => window.matchMedia("(max-width: 1023px)").matches;
+
+const syncMobileMenuButtonState = (isOpen) => {
+	const button = document.getElementById("menu-button");
+	if (!button) {
+		return;
+	}
+	button.dataset.state = isOpen ? "open" : "closed";
+	button.setAttribute("aria-expanded", isOpen ? "true" : "false");
+};
+
+const onMobileMenuCloseClick = () => {
 	const dialog = document.getElementById("bottom-sidebar");
-	if (dialog) {
+	if (dialog && dialog.open) {
+		dialog.close();
+	}
+	syncMobileMenuButtonState(false);
+};
+
+const onMobileMenuButtonClick = () => {
+	const dialog = document.getElementById("bottom-sidebar");
+	if (!dialog || !isMobileMenuViewport()) {
+		syncMobileMenuButtonState(false);
+		return;
+	}
+	if (dialog.open) {
+		dialog.close();
+		syncMobileMenuButtonState(false);
+	} else {
 		dialog.showModal();
+		syncMobileMenuButtonState(true);
 	}
 };
+
+window.addEventListener("resize", () => {
+	if (isMobileMenuViewport()) {
+		return;
+	}
+	onMobileMenuCloseClick();
+});
 
 const clipboardIcon = () => {
 	const svgElement = document.createElementNS(

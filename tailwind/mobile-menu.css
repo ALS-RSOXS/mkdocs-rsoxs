@@ -1,0 +1,61 @@
+#bottom-sidebar {
+	margin: 0;
+	max-width: 100%;
+	max-height: 100dvh;
+	width: 100%;
+	height: 100%;
+	border: none;
+	padding: 0;
+	background: transparent;
+	display: none;
+}
+
+#bottom-sidebar[open] {
+	display: flex;
+}
+
+#bottom-sidebar::backdrop {
+	background: color-mix(in srgb, var(--als-sky-darkest) 42%, #000 25%);
+	backdrop-filter: blur(6px);
+	-webkit-backdrop-filter: blur(6px);
+}
+
+.mobile-nav-shell {
+	box-shadow: 0 25px 50px -12px color-mix(in srgb, var(--als-sky-darkest) 18%, transparent);
+}
+
+.dark #bottom-sidebar::backdrop {
+	background: color-mix(in srgb, #000 55%, var(--als-sky-darkest) 20%);
+}
+
+#bottom-sidebar .mobile-nav-link {
+	text-decoration: none;
+	border: none;
+	border-left: 3px solid transparent;
+}
+
+#bottom-sidebar .mobile-nav-link:focus-visible {
+	outline: 2px solid var(--als-sky-light);
+	outline-offset: 2px;
+}
+
+#bottom-sidebar .mobile-nav-link[aria-current="page"] {
+	font-weight: 600;
+	border-left-color: var(--als-sky-mid);
+	background-color: color-mix(in srgb, var(--als-finch-surface) 80%, white);
+}
+
+.dark #bottom-sidebar .mobile-nav-link[aria-current="page"] {
+	border-left-color: var(--als-sky-light);
+	background-color: color-mix(in srgb, white 5%, transparent);
+}
+
+#bottom-sidebar .mobile-nav-link:hover:not([aria-current="page"]) {
+	border-left-color: color-mix(in srgb, var(--als-finch-border) 60%, transparent);
+	background-color: color-mix(in srgb, var(--als-finch-surface) 90%, white);
+}
+
+.dark #bottom-sidebar .mobile-nav-link:hover:not([aria-current="page"]) {
+	border-left-color: color-mix(in srgb, var(--als-finch-border) 40%, transparent);
+	background-color: color-mix(in srgb, white 5%, transparent);
+}

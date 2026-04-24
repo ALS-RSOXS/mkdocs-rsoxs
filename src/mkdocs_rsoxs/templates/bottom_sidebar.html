@@ -1,55 +1,115 @@
-<dialog id="bottom-sidebar" onclick="onBottomSidebarDialogClick(event)" class="bg-transparent"
-    style="position: fixed; left: 0px; top: 0px; transform: translate(0px, 58px); min-width: max-content; --radix-popper-transform-origin: 0% 0px; will-change: transform; z-index: 50; --radix-popper-available-width: 504px; --radix-popper-available-height: 857px; --radix-popper-anchor-width: 72.94999694824219px; --radix-popper-anchor-height: 32px;">
-    <div data-side="bottom" data-align="start" data-state="open" role="dialog" data-slot="popover-content"
-        class="text-popover-foreground data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 origin-(--radix-popover-content-transform-origin) border outline-hidden bg-background/90 no-scrollbar h-(--radix-popper-available-height) w-(--radix-popper-available-width) overflow-y-auto rounded-none border-none p-0 shadow-none backdrop-blur duration-100"
-        style="--radix-popover-content-transform-origin: var(--radix-popper-transform-origin); --radix-popover-content-available-width: var(--radix-popper-available-width); --radix-popover-content-available-height: var(--radix-popper-available-height); --radix-popover-trigger-width: var(--radix-popper-anchor-width); --radix-popover-trigger-height: var(--radix-popper-anchor-height);"
-        tabindex="-1">
-        <div class="flex flex-col gap-12 overflow-auto px-6 py-6">
-            {% if nav|length > 1 %}
-            {% set top_items = nav|selectattr("is_page")|sort(attribute="meta.order") %}
-            {% set other_items = nav|rejectattr("is_page")|list %}
-
-            {% if top_items|length > 0 %}
-            <div class="flex flex-col gap-4">
-                <div class="text-muted-foreground text-sm font-medium">Menu</div>
-                <div class="flex flex-col gap-3">
-                    {% for top_item in top_items %}
-                    <a class="text-2xl font-medium" href="{{ top_item.url | url }}">
-                        {% if top_item.meta and top_item.meta.sidebar_title %}
-                        {{ top_item.meta.sidebar_title }}
-                        {% else %}
-                        {{ top_item.title }}
-                        {% endif %}
-                    </a>
-                    {% endfor %}
+<dialog
+    id="bottom-sidebar"
+    onclick="onBottomSidebarDialogClick(event)"
+    class="text-foreground fixed inset-0 z-50 m-0 h-full w-full max-h-dvh max-w-full flex-col items-stretch border-0 bg-transparent p-0 [interpolate-size:allow-keywords] outline-none lg:hidden"
+>
+    {% set close_mobile_menu_js = "document.getElementById('bottom-sidebar')?.close();const button=document.getElementById('menu-button');if(button){button.dataset.state='closed';button.setAttribute('aria-expanded','false');}" %}
+    <div class="flex h-full min-h-0 w-full flex-1 justify-start">
+        <div
+            data-side="left"
+            data-state="open"
+            role="dialog"
+            data-slot="popover-content"
+            aria-label="Site navigation"
+            class="text-popover-foreground mobile-nav-shell flex h-full w-[min(21rem,100%)] min-w-0 max-w-sm shrink-0 flex-col overflow-hidden border-r border-als-finch-neutral-border/60 bg-background/98 backdrop-blur-md dark:border-white/10 dark:bg-als-slate-deep/95 sm:max-w-sm sm:rounded-r-3xl"
+        >
+            <div
+                class="border-b border-als-finch-neutral-border/50 bg-als-finch-surface/50 px-5 pb-4 pt-5 dark:border-white/5 dark:bg-als-sky-darkest/30"
+            >
+                <div class="flex items-start justify-between gap-3">
+                    <div class="min-w-0">
+                        <p
+                            class="text-als-sky-mid text-[0.65rem] font-semibold uppercase tracking-[0.2em] dark:text-als-slate-mid"
+                        >
+                            Menu
+                        </p>
+                        <p
+                            class="text-als-sky-darkest mt-1 truncate text-sm font-medium leading-tight dark:text-als-slate-light"
+                        >
+                            {{ config.site_name }}
+                        </p>
+                    </div>
+                    <button
+                        type="button"
+                        class="text-als-slate-mid hover:text-als-sky-darkest inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-als-sky-light dark:text-als-slate-light dark:hover:text-white"
+                        onclick="{{ close_mobile_menu_js }}"
+                        aria-label="Close menu"
+                    >
+                        <span class="text-lg leading-none" aria-hidden="true">x</span>
+                    </button>
                 </div>
             </div>
-            {% endif %}
+            <div class="flex min-h-0 flex-1 flex-col overflow-y-auto overscroll-contain no-scrollbar">
+                <div class="flex flex-col gap-8 px-3 py-4">
+                    {% if nav|length > 1 %}
+                    {% set top_items = nav|selectattr("is_page")|sort(attribute="meta.order") %}
+                    {% set other_items = nav|rejectattr("is_page")|list %}
 
-            {% if other_items|length > 0 %}
-            <div class="flex flex-col gap-8">
-                {% for top_item in other_items %}
-                <div class="flex flex-col gap-4">
-                    <div class="text-muted-foreground text-sm font-medium">{{ top_item.title }}</div>
-                    {% if top_item.children %}
-                    <div class="flex flex-col gap-3">
-                        {% for sidebar_item in top_item.children|selectattr("is_page")|sort(attribute="meta.order") %}
-                        <a class="text-2xl font-medium" href="{{ sidebar_item.url | url}}">
-                            {% if sidebar_item.meta and sidebar_item.meta.sidebar_title %}
-                            {{ sidebar_item.meta.sidebar_title }}
-                            {% else %}
-                            {{ sidebar_item.title }}
+                    {% if top_items|length > 0 %}
+                    <div class="flex flex-col gap-1.5">
+                        <nav aria-label="Primary">
+                            <ul class="flex flex-col gap-1">
+                                {% for top_item in top_items %}
+                                <li>
+                                    <a
+                                        href="{{ top_item.url | url }}"
+                                        class="mobile-nav-link text-foreground block rounded-xl py-2.5 pl-3 pr-3 text-left text-base font-medium leading-snug transition-colors"
+                                        onclick="{{ close_mobile_menu_js }}"
+                                        {% if top_item.active %}aria-current="page"{% endif %}
+                                    >
+                                        {% if top_item.meta and top_item.meta.sidebar_title %}
+                                        {{ top_item.meta.sidebar_title }}
+                                        {% else %}
+                                        {{ top_item.title }}
+                                        {% endif %}
+                                    </a>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </nav>
+                    </div>
+                    {% endif %}
+
+                    {% if other_items|length > 0 %}
+                    <div class="flex flex-col gap-6">
+                        {% for top_item in other_items %}
+                        <div class="flex flex-col gap-2">
+                            <div
+                                class="text-als-slate-mid border-als-finch-neutral-border/50 flex items-center gap-2 border-b border-dotted pb-2 text-xs font-semibold uppercase tracking-wider"
+                            >
+                                <span
+                                    class="bg-als-sky-light/25 h-1.5 w-1.5 shrink-0 rounded-full"
+                                    aria-hidden="true"
+                                ></span>
+                                {{ top_item.title }}
+                            </div>
+                            {% if top_item.children %}
+                            <ul class="flex flex-col gap-1" role="list">
+                                {% for sidebar_item in top_item.children|selectattr("is_page")|sort(attribute="meta.order") %}
+                                <li>
+                                    <a
+                                        class="mobile-nav-link text-foreground block rounded-xl py-2.5 pl-3 pr-3 text-left text-base font-medium leading-snug transition-colors"
+                                        onclick="{{ close_mobile_menu_js }}"
+                                        href="{{ sidebar_item.url | url}}"
+                                        {% if sidebar_item.active %}aria-current="page"{% endif %}
+                                    >
+                                        {% if sidebar_item.meta and sidebar_item.meta.sidebar_title %}
+                                        {{ sidebar_item.meta.sidebar_title }}
+                                        {% else %}
+                                        {{ sidebar_item.title }}
+                                        {% endif %}
+                                    </a>
+                                </li>
+                                {% endfor %}
+                            </ul>
                             {% endif %}
-                        </a>
+                        </div>
                         {% endfor %}
                     </div>
                     {% endif %}
+                    {% endif %}
                 </div>
-                {% endfor %}
             </div>
-            {% endif %}
-            {% endif %}
-
         </div>
     </div>
 </dialog>
