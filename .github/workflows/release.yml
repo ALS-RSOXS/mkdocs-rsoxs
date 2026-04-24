@@ -84,3 +84,37 @@ jobs:
           body_path: RELEASE_NOTES.md
           files: dist/*
           generate_release_notes: false
+
+  build-docs-post-release:
+    name: Build Docs (Post Release)
+    needs: [github-release]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v4
+        with:
+          enable-cache: true
+
+      - name: Set up Python
+        run: uv python install 3.13
+
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.3.11
+
+      - name: Install dependencies
+        run: make install
+
+      - name: Build documentation
+        run: make docs
+
+      - name: Store built docs artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: documentation-site-post-release
+          path: site/
