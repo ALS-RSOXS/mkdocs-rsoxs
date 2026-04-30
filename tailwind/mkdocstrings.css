@@ -23,7 +23,7 @@ article .doc details + .doc-children {
 }
 
 article .doc .doc-contents {
-	@apply mt-2 flex flex-col gap-2 empty:mt-0;
+	@apply mt-2 flex max-w-full min-w-0 flex-col gap-2 empty:mt-0;
 }
 
 article .doc .doc-contents.first {
@@ -55,11 +55,21 @@ article .doc .doc-contents details {
 }
 
 article .doc .doc-contents table:not(.codehilitetable) {
-	@apply text-sm mt-2 w-full;
+	@apply mt-2 min-w-0 w-full max-w-full text-sm;
 }
 
-article .doc .doc-contents table th {
+article .doc .doc-contents table:not(.codehilitetable) thead tr th,
+article .doc .doc-contents table:not(.codehilitetable) tbody tr td {
+	@apply align-top whitespace-normal break-words;
+}
+
+article .doc .doc-contents table:not(.codehilitetable) thead tr th {
 	@apply font-medium;
+}
+
+article .doc .doc-contents table:not(.codehilitetable) :is(th, td) code {
+	white-space: normal;
+	word-break: break-word;
 }
 
 article .doc .doc-contents .doc-class-bases {
@@ -71,7 +81,7 @@ article .doc .doc-contents .doc-section-title {
 }
 
 article .doc .doc-object {
-	@apply p-5 bg-slate-50 dark:bg-slate-900 rounded-lg;
+	@apply max-w-full min-w-0 rounded-lg bg-slate-50 p-5 dark:bg-slate-900;
 }
 
 article .doc .doc-object.doc-function {
@@ -89,7 +99,7 @@ article .doc .doc-object .doc-labels {
 }
 
 article .doc .doc-object .doc-contents {
-	@apply text-muted-foreground text-sm;
+	@apply max-w-full min-w-0 overflow-x-auto text-muted-foreground text-sm;
 }
 
 article .doc .doc-object .doc-contents ul > li {
