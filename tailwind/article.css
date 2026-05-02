@@ -78,14 +78,6 @@ article code:not(pre code) {
 	@apply text-[var(--color-code-foreground)] bg-[var(--color-code)] border border-als-finch-neutral-border/65 relative rounded-md px-[0.36rem] py-[0.2rem] font-mono text-[0.82rem] outline-none;
 }
 
-article tr td.linenos pre {
-	@apply text-sm;
-}
-
-article td.code pre {
-	@apply leading-0;
-}
-
 article .external_links > a {
 	@apply no-underline;
 }

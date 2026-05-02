@@ -54,20 +54,20 @@ article .doc .doc-contents details {
 	@apply py-2;
 }
 
-article .doc .doc-contents table:not(.codehilitetable) {
+article .doc .doc-contents table:not(.codehilitetable):not(.highlighttable) {
 	@apply mt-2 min-w-0 w-full max-w-full text-sm;
 }
 
-article .doc .doc-contents table:not(.codehilitetable) thead tr th,
-article .doc .doc-contents table:not(.codehilitetable) tbody tr td {
+article .doc .doc-contents table:not(.codehilitetable):not(.highlighttable) thead tr th,
+article .doc .doc-contents table:not(.codehilitetable):not(.highlighttable) tbody tr td {
 	@apply align-top whitespace-normal break-words;
 }
 
-article .doc .doc-contents table:not(.codehilitetable) thead tr th {
+article .doc .doc-contents table:not(.codehilitetable):not(.highlighttable) thead tr th {
 	@apply font-medium;
 }
 
-article .doc .doc-contents table:not(.codehilitetable) :is(th, td) code {
+article .doc .doc-contents table:not(.codehilitetable):not(.highlighttable) :is(th, td) code {
 	white-space: normal;
 	word-break: break-word;
 }

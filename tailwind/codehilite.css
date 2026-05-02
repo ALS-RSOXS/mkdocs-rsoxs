@@ -1,36 +1,63 @@
-article .codehilite table.codehilitetable {
+article .codehilite table:is(.codehilitetable, .highlighttable),
+article .highlight table:is(.codehilitetable, .highlighttable) {
 	border-collapse: unset;
 	margin: 0;
-	width: 100%;
+	width: max-content;
+	min-width: 100%;
 }
 
-article .codehilite .linenos {
+article .codehilite .linenos,
+article .highlight .linenos {
 	@apply text-[0.8rem] text-right sticky left-0 text-[var(--color-code-number)] bg-[color-mix(in_srgb,var(--color-code)_86%,transparent)] pr-4 pl-3 border-r border-als-finch-neutral-border/55;
 }
 
-article .codehilite .hll .linenos {
+article .codehilite .hll .linenos,
+article .highlight .hll .linenos {
 	@apply bg-transparent;
 }
 
-article .codehilite td.linenos {
+article .codehilite td.linenos,
+article .highlight td.linenos {
 	@apply pr-0 align-top;
 }
 
-article .codehilite:has(& > .codehilitetable) {
-	@apply overflow-auto;
+article .codehilite td.code,
+article .highlight td.code {
+	@apply align-top;
 }
 
-article table.codehilitetable pre,
-article table.codehilitetable code {
-	@apply overflow-visible h-full;
+article table:is(.codehilitetable, .highlighttable) td.code > :is(.codehilite, .highlight) {
+	margin: 0;
+	padding: 0;
+	background: transparent;
+	border: 0;
 }
 
-article table.codehilitetable tbody tr td {
+article table:is(.codehilitetable, .highlighttable) td.linenos .linenodiv {
+	margin: 0;
+	padding: 0;
+}
+
+article table:is(.codehilitetable, .highlighttable) tbody tr td {
 	@apply border-0;
 }
 
-article table.codehilitetable pre {
-	@apply px-0 m-0;
+article table:is(.codehilitetable, .highlighttable) :is(td.linenos, td.code) pre {
+	@apply m-0 max-h-none overflow-visible rounded-none border-0 bg-transparent p-0 font-mono text-[0.9rem] leading-6 not-italic shadow-none;
+	white-space: pre;
+	word-break: normal;
+	overflow-wrap: normal;
+}
+
+article table:is(.codehilitetable, .highlighttable) td.code pre code {
+	@apply m-0 block bg-transparent p-0 font-mono not-italic;
+	font-size: inherit;
+	line-height: inherit;
+}
+
+article table:is(.codehilitetable, .highlighttable) td.code pre span {
+	padding-top: 0;
+	padding-bottom: 0;
 }
 
 article .codehilite,
@@ -38,8 +65,13 @@ article .highlight {
 	@apply text-[var(--color-code-foreground)] bg-[var(--color-code)] border border-als-finch-neutral-border/75 rounded-xl relative mt-7 mb-5 overflow-hidden shadow-[0_10px_30px_-20px_rgba(0,0,0,0.45)];
 }
 
-article .codehilite pre,
-article .highlight pre {
+article .codehilite:has(table),
+article .highlight:has(table) {
+	overflow: auto;
+}
+
+article .codehilite > pre,
+article .highlight > pre {
 	@apply mb-0 mt-0 overflow-auto px-4 py-3.5 leading-6;
 }
 
